@@ -1,7 +1,6 @@
-#!/usr/bin/env python
-#coding=utf-8
+# vi: set ft=python sts=4 ts=4 sw=4 et:
 
-from transform import SVGFigure, GroupElement
+from .transform import SVGFigure, GroupElement
 
 class BaseTemplate(SVGFigure):
 

@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# coding=utf-8
+# vi: set ft=python sts=4 ts=4 sw=4 et:
+
 """SVG definitions designed for easy SVG composing
 
 Features:
@@ -11,13 +11,15 @@ Features:
     * no boilerplate code (reading files, extracting objects from svg,
                            transversing XML tree)
     * universal methods applicable to all element types
-    * don't have to learn python
 """
+
+from __future__ import absolute_import
 
 import os
 import re
 
-from svgutils import transform as _transform
+from . import transform as _transform
+
 CONFIG = {'svg.file_path': '.',
           'figure.save_path' : '.',
           'image.file_path': '.',

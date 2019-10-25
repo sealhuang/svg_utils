@@ -1,3 +1,5 @@
+# vi: set ft=python sts=4 ts=4 sw=4 et:
+
 from lxml import etree
 from copy import deepcopy
 import codecs
@@ -215,11 +217,17 @@ class SVGFigure(object):
         self._height = 0
 
         if width:
-            self._width = width.value
-            self.width = width
+            # XXX: for compatibility of weasyprint, we convert the 
+            # unit of width to px
+            px_width = width.to('px')
+            self._width = px_width.value
+            self.width = px_width
         if height:
-            self._height = height.value
-            self.height = height
+            # XXX: for compatibility of weasyprint, we convert the 
+            # unit of height to px
+            px_height = height.to('px')
+            self._height = px_height.value
+            self.height = px_height
 
     @property
     def width(self):
@@ -313,7 +321,7 @@ def fromfile(fname):
         newly created :py:class:`SVGFigure` initialised with the file content
     """
     fig = SVGFigure()
-    with open(fname) as fid:
+    with open(fname, encoding='utf-8') as fid:
         svg_file = etree.parse(fid)
 
     fig.root = svg_file.getroot()
@@ -335,7 +343,7 @@ def fromstring(text):
         content.
     """
     fig = SVGFigure()
-    svg = etree.fromstring(text.encode())
+    svg = etree.fromstring(text.encode('utf-8'))
 
     fig.root = svg
 
